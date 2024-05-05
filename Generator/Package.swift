@@ -8,7 +8,8 @@ let package = Package(
     ],
     products: [
         .executable(name: "needle", targets: ["needle"]),
-        .library(name: "NeedleFramework", targets: ["NeedleFramework"])
+        .library(name: "NeedleFramework", targets: ["NeedleFramework"]),
+        .plugin(name: "needle-plugin", targets: ["needle-plugin"]),
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-tools-support-core", .exact("0.2.7")),
@@ -38,6 +39,10 @@ let package = Package(
                 "NeedleFramework",
                 .product(name: "CommandFramework", package: "swift-common")
             ]),
+        .plugin(
+            name: "needle-plugin",
+            capability: .buildTool,
+            dependencies: [ "needle" ])
     ],
     swiftLanguageVersions: [.v5]
 )
